@@ -1,4 +1,4 @@
-package CicekSepeti;
+package CicekSepeti.tests;
 
 import CicekSepeti.drivers.Driver;
 import org.junit.After;
@@ -16,12 +16,14 @@ public class Test1 {
         Driver.get().get("https://www.ciceksepeti.com/");
         Driver.get().manage().window().maximize();
         Driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(8));
+        Driver.get().switchTo().frame(Driver.get().findElement(By.className("ab-modal-interactions")));
+        Driver.get().findElement(By.className("close-icon")).click();
         Driver.get().findElement(By.className("js-subheader-close")).click();
         Driver.get().findElement(By.className("js-policy-close")).click();
 
     }
     @Test
-    public void testscenario1 () {
+    public void urunsepeteekleme () {
 
         Driver.get().findElement(By.cssSelector(".main-menu__item:nth-child(8)")).click();
         Driver.get().findElement(By.xpath("//img[@alt='Dizüstü Bilgisayar']")).click();
@@ -31,7 +33,7 @@ public class Test1 {
 
     }
     @Test
-    public void testscenario2 () {
+    public void urunsepeteekleme2 () {
 
         Driver.get().findElement(By.cssSelector(".main-menu__item:nth-child(6)")).click();
         JavascriptExecutor js = (JavascriptExecutor) Driver.get();
@@ -39,11 +41,11 @@ public class Test1 {
         Driver.get().findElement(By.xpath("//img[@alt='bernardo']")).click();
         Driver.get().findElement(By.cssSelector(".products__item:nth-child(3)")).click();
         Driver.get().findElement(By.cssSelector(".js-add-to-cart")).click();
-       Assert.assertTrue(Driver.get().findElement(By.xpath("//span[text()=\"1\"]")).isDisplayed());
+        Assert.assertTrue(Driver.get().findElement(By.xpath("//span[text()='1']")).isDisplayed());
 
     }
     @After
-    public void teardone() {
+    public void teardown() {
         Driver.closeDriver();
     }
 }
